@@ -1,11 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import CityInput from "./CityInput";
 import TableInput from "./TableInput";
 import GraphInput from "./GraphInput";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navbar } from 'react-bootstrap';
+
 
 function App() {
   return (
@@ -14,6 +13,7 @@ function App() {
         <div className="container d-flex align-items-center">
 
           <div className="logo mr-auto">
+              {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <h1 className="text-light"><a href=""><span>WEATHER</span></a></h1>
           </div>
         </div>
@@ -23,7 +23,6 @@ function App() {
       <section id="hero">
         <div className="hero-container">
           <h1>WEATHER STATISTIC</h1>
-          <h2></h2>
           <a href="#about" className="btn-get-started scrollto">Get Started</a>
         </div>
       </section>
@@ -90,7 +89,8 @@ function App() {
       </footer>
 
 
-      <a href="#" className="back-to-top"><i className="icofont-simple-up"></i></a>
+        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+      <a href="#" className="back-to-top"><i className="icofont-simple-up"/></a>
     </div>
   );
 }
