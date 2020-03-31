@@ -1,8 +1,9 @@
 import React from 'react';
 import './App.css';
-
+import axios from 'axios';
+import { useToasts } from 'react-toast-notifications';
 class CityInput extends React.Component {
-
+    addToast;
     constructor(props) {
         super(props);
         this.city = "";
@@ -11,16 +12,22 @@ class CityInput extends React.Component {
     handleChange(event) {
         this.city = event.target.value;
         console.log(this.city);
+        this.props.toggleOverlay("eveeeeee");
     };
 
 
-    addCity() {
-        console.log(this.city);
+    addCity = () => {
+        this.addToast = useToasts()
+        console.log("api.openweathermap.org/data/2.5/forecast?q="+this.city +"&appid=6c4b3a3b02a04f0626ff97606e9453fd");
 
+        axios.get("https://api.openweathermap.org/data/2.5/forecast?q="+this.city +"&appid=6c4b3a3b02a04f0626ff97606e9453fd")
+            .then(res => {
+                console.log("Urosao zahtev")
+            }).catch((response) => this.addToast(response, { appearance: 'error' }));
     };
     render() {
         return (
-            <div class="d-flex justify-content-center">
+            <div className="d-flex justify-content-center">
 
 
                     <div className="form-group mx-sm-3 mb-2">
