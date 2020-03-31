@@ -1,6 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import CityInput from "./CityInput";
+import TableInput from "./TableInput";
+import GraphInput from "./GraphInput";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar } from 'react-bootstrap';
 
@@ -32,7 +35,7 @@ function App() {
         <div className="container">
           <div className="section-title">
             <h2>OVDE CE SE DODAJE</h2>
-            <p>Tabela sa podacima</p>
+              <CityInput/>
           </div>
 
         </div>
@@ -46,7 +49,7 @@ function App() {
 
           <div className="section-title">
             <h2>Tabelarni prikaz</h2>
-            <p>Tabela sa podacima</p>
+                <TableInput/>
           </div>
 
           <div className="row">
@@ -62,7 +65,7 @@ function App() {
         <div className="container">
           <div className="section-title">
             <h2>Grafikon</h2>
-            <p>Tabela sa podacima</p>
+            <GraphInput/>
           </div>
 
 
