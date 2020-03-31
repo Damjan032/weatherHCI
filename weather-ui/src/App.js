@@ -33,10 +33,10 @@ function App() {
       <section id="about" className="about">
         <div className="container">
           <div className="section-title">
-            <h2>OVDE CE SE DODAJE</h2>
-              <CityInput/>
-          </div>
+            <h2>Please enter a city name</h2>
 
+          </div>
+            <CityInput/>
         </div>
 
       </section>

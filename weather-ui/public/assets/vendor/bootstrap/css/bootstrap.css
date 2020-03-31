@@ -2063,6 +2063,7 @@ pre code {
 }
 
 .form-control:focus {
+  text-align:center;
   color: #495057;
   background-color: #fff;
   border-color: #80bdff;
