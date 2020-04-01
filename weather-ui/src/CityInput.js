@@ -10,7 +10,7 @@ class CityInput extends React.Component {
     };
 
     handleChange(event) {
-        this.city = event.target.value;
+        this.city = event.target.value.trim();
         console.log(this.city);
 
     };
