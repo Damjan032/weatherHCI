@@ -11,9 +11,9 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 class App extends React.Component{
     constructor(props) {
         super(props);
-        this.citys = [];
-        this.citysCurrent = [];
-        this.citys5Days = [];
+        this.cities = [];
+        this.citiesCurrent = [];
+        this.cities5Days = [];
     };
     inputLisener = (cityWeather) => {
         console.log(cityWeather.data.sys);
@@ -24,7 +24,7 @@ class App extends React.Component{
             main : cityWeather.data.main,
             wind : cityWeather.data.wind
         };
-        if(this.citys.includes(pomCity.name)){
+        if(this.cities.includes(pomCity.name)){
             confirmAlert({
                 title: 'Already exist',
                 message: pomCity.name +' is already on list.',
@@ -37,10 +37,10 @@ class App extends React.Component{
             });
             return 1;
         }
-        this.citys.push(pomCity.name);
-        console.log(this.citysCurrent);
-        this.citysCurrent.push(pomCity);
-        console.log(this.citys);
+        this.cities.push(pomCity.name);
+        this.citiesCurrent.push(pomCity);
+        console.log(this.citiesCurrent);
+        console.log(this.cities);
         confirmAlert({
             title: 'Success',
             message: pomCity.name + ' added on list',
@@ -104,7 +104,7 @@ class App extends React.Component{
                         <div className="section-title">
                             <h2>Tabelarni prikaz</h2>
                         </div>
-                        <TableInput citys={this.citysCurrent}/>
+                        <TableInput cities={this.citiesCurrent}/>
 
                     </div>
                 </section>
