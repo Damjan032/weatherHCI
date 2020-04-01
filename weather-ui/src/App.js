@@ -9,18 +9,44 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 
 class App extends React.Component{
-    inputLisener = (parm) => {
-        console.log(parm);
+    constructor(props) {
+        super(props);
+        this.citys = [];
+        this.citysCurrent = [];
+        this.citys5Days = [];
+    };
+    inputLisener = (cityWeather) => {
+        console.log(cityWeather.data.sys);
+        let pomCity = {
+            name: cityWeather.data.name,
+            country : cityWeather.data.sys.country,
+            weather :  cityWeather.data.weather[0],
+            main : cityWeather.data.main,
+            wind : cityWeather.data.wind
+        };
+        if(this.citys.includes(pomCity.name)){
+            confirmAlert({
+                title: 'Already exist',
+                message: pomCity.name +' is already on list.',
+                buttons: [
+                    {
+                        label: 'OK',
+                        onClick: () => {}
+                    }
+                ]
+            });
+            return 1;
+        }
+        this.citys.push(pomCity.name);
+        console.log(this.citysCurrent);
+        this.citysCurrent.push(pomCity);
+        console.log(this.citys);
         confirmAlert({
-            title: 'Confirm to submit',
-            message: 'Are you sure to do this.',
+            title: 'Success',
+            message: pomCity.name + ' added on list',
             buttons: [
                 {
-                    label: 'Yes',
-                    onClick: () => {}
-                },
-                {
-                    label: 'No',
+                    label: 'OK',
                     onClick: () => {}
                 }
             ]
@@ -77,11 +103,8 @@ class App extends React.Component{
 
                         <div className="section-title">
                             <h2>Tabelarni prikaz</h2>
-                            <TableInput/>
                         </div>
-                        <div className="row">
-
-                        </div>
+                        <TableInput citys={this.citysCurrent}/>
 
                     </div>
                 </section>

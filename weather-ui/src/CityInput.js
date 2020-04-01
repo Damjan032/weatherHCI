@@ -18,12 +18,12 @@ class CityInput extends React.Component {
 
     addCity = () => {
 
-        axios.get("https://api.openweathermap.org/data/2.5/forecast?q="+this.city +"&appid=6c4b3a3b02a04f0626ff97606e9453fd")
+        axios.get("https://api.openweathermap.org/data/2.5/weather?q="+this.city +"&appid=6c4b3a3b02a04f0626ff97606e9453fd")
             .then(res => {
                 console.log("Urosao zahtev")
                 this.props.toggleOverlay(res);
             }).catch((response) => {
-            if (this.city == '') {
+            if (this.city === '') {
                 confirmAlert({
                     title: "Empty",
                     message: "Please enter the name of the city",
