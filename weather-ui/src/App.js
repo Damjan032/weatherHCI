@@ -4,11 +4,27 @@ import CityInput from "./CityInput";
 import TableInput from "./TableInput";
 import GraphInput from "./GraphInput";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 
 class App extends React.Component{
     inputLisener = (parm) => {
         console.log(parm);
+        confirmAlert({
+            title: 'Confirm to submit',
+            message: 'Are you sure to do this.',
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {}
+                },
+                {
+                    label: 'No',
+                    onClick: () => {}
+                }
+            ]
+        });
     };
 
 

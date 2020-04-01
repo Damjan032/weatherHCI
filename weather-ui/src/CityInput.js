@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
-import { useToasts } from 'react-toast-notifications';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 class CityInput extends React.Component {
-    addToast;
     constructor(props) {
         super(props);
         this.city = "";
@@ -12,18 +12,45 @@ class CityInput extends React.Component {
     handleChange(event) {
         this.city = event.target.value;
         console.log(this.city);
-        this.props.toggleOverlay("eveeeeee");
+
     };
 
 
     addCity = () => {
-        this.addToast = useToasts()
-        console.log("api.openweathermap.org/data/2.5/forecast?q="+this.city +"&appid=6c4b3a3b02a04f0626ff97606e9453fd");
 
         axios.get("https://api.openweathermap.org/data/2.5/forecast?q="+this.city +"&appid=6c4b3a3b02a04f0626ff97606e9453fd")
             .then(res => {
                 console.log("Urosao zahtev")
-            }).catch((response) => this.addToast(response, { appearance: 'error' }));
+                this.props.toggleOverlay(res);
+            }).catch((response) => {
+            if (this.city == '') {
+                confirmAlert({
+                    title: "Empty",
+                    message: "Please enter the name of the city",
+                    buttons: [
+                        {
+                            label: 'OK',
+                            onClick: () => {
+                            }
+                        }
+                    ]
+                });
+            } else {
+
+                confirmAlert({
+                    title: "Not fount",
+                    message: "Sorry, we can't found " + this.city,
+                    buttons: [
+                        {
+                            label: 'OK',
+                            onClick: () => {
+                            }
+                        }
+                    ]
+                });
+            }
+
+        } );
     };
     render() {
         return (
