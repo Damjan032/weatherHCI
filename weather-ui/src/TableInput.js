@@ -5,7 +5,15 @@ class TableInput extends React.Component {
     // eslint-disable-next-line no-useless-constructor
     constructor(props) {
         super(props);
-    };
+    }
+    componentWillReceiveProps(newPrps){
+        console.log("Usaooo")
+    }
+
+    shouldComponentUpdate(nextProps) {
+        console.log("Triggerd");
+        return true;
+    }
 
     render() {
         return (
@@ -25,7 +33,7 @@ class TableInput extends React.Component {
                 <tbody>
                 {this.props.cities.map(city => (
                     <tr>
-                        <td>{city.country}<img src={"https://www.countryflags.io/"+city.country+"/shiny/32.png"} alt={city.country}/></td>
+                        <td>{city}<img src={"https://www.countryflags.io/"+city+"/shiny/32.png"} alt={city}/></td>
                         <td>Larry</td>
                         <td>the Bird</td>
                         <td>@twitter</td>

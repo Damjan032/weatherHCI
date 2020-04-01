@@ -11,9 +11,12 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 class App extends React.Component{
     constructor(props) {
         super(props);
-        this.cities = [];
-        this.citiesCurrent = [];
-        this.cities5Days = [];
+        this.state = {
+            cities : [],
+            citiesCurrent : [],
+            cities5Days : []
+        };
+
     };
     inputLisener = (cityWeather) => {
         console.log(cityWeather.data.sys);
@@ -24,7 +27,7 @@ class App extends React.Component{
             main : cityWeather.data.main,
             wind : cityWeather.data.wind
         };
-        if(this.cities.includes(pomCity.name)){
+        if(this.state.cities.includes(pomCity.name)){
             confirmAlert({
                 title: 'Already exist',
                 message: pomCity.name +' is already on list.',
@@ -37,10 +40,10 @@ class App extends React.Component{
             });
             return 1;
         }
-        this.cities.push(pomCity.name);
-        this.citiesCurrent.push(pomCity);
-        console.log(this.citiesCurrent);
-        console.log(this.cities);
+        this.state.cities.push(pomCity.name);
+        this.state.citiesCurrent.push(pomCity);
+        console.log(this.state.citiesCurrent);
+        console.log(this.state.cities);
         confirmAlert({
             title: 'Success',
             message: pomCity.name + ' added on list',
@@ -87,7 +90,7 @@ class App extends React.Component{
                         <CityInput toggleOverlay={this.inputLisener}/>
                         <br/>
                         <div className="row d-flex justify-content-center">
-                            <a width="150px" className="btn btn-outline-secondary scrollto custom" href="#about" role="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See table&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                            <a width="150px" className="btn btn-outline-secondary scrollto custom" href="#services" role="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See table&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <a className="btn btn-outline-secondary scrollto" href="#graph" role="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See graph&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         </div>
@@ -102,9 +105,9 @@ class App extends React.Component{
                     <div className="container">
 
                         <div className="section-title">
-                            <h2>Tabelarni prikaz</h2>
+                            <h3>CURRENT WEATHER</h3>
                         </div>
-                        <TableInput cities={this.citiesCurrent}/>
+                        <TableInput cities={this.state.citiesCurrent}/>
 
                     </div>
                 </section>
@@ -131,7 +134,7 @@ class App extends React.Component{
                             <div className="row  justify-content-center">
                                 <div className="col-lg-6">
                                     <h3>weather</h3>
-                                    <p>Nesto pise.</p>
+                                    <p>Damjan Manojlović 2020&copy;.</p>
                                 </div>
                             </div>
 
@@ -148,3 +151,5 @@ class App extends React.Component{
 }
 
 export default App;
+
+
