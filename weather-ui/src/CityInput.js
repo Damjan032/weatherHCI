@@ -55,8 +55,6 @@ class CityInput extends React.Component {
     render() {
         return (
             <div className="d-flex justify-content-center">
-
-
                     <div className="form-group mx-sm-3 mb-2">
                         <label htmlFor="inputPassword2" className="sr-only">e.g. "Beograd"</label>
                         <input type="text" className="form-control" placeholder='e.g. "Beograd"' onKeyUp={this.handleChange.bind(this)}/>

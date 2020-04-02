@@ -1,24 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import CityInput from "./CityInput";
 import TableInput from "./TableInput";
 import GraphInput from "./GraphInput";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 
-class App extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            cities : [],
-            citiesCurrent : [],
-            cities5Days : []
-        };
+function App(){
+    let aCities = [];
+    let aCitiesCurrent = [];
+    let aCities5Days = [];
+    const [cities, setCities] = useState(aCities);
+    const [citiesCurrent, setCitiesCurrent] = useState(aCitiesCurrent);
+    const [cities5Days, setCities5Days] = useState(aCities5Days);
+
+    const removeLisener = (city) => {
+        console.log(citiesCurrent);
+        console.log(cities);
+        confirmAlert({
+            title: 'Warring!',
+            message:"Are you sure you want to remove "+ city +"?",
+            buttons: [
+                {
+                    label: 'Yes',
+                    onClick: () => {
+                        setCities(cities.filter((c)=>(c !== city)));
+                        setCitiesCurrent(citiesCurrent.filter((c)=>(c.name !== city)));
+                    }
+                },
+                {
+                    label: 'No',
+                    onClick: () => {}
+                }
+            ]
+        });
 
     };
-    inputLisener = (cityWeather) => {
+
+    const inputLisener = (cityWeather) => {
         console.log(cityWeather.data.sys);
         let pomCity = {
             name: cityWeather.data.name,
@@ -27,7 +47,7 @@ class App extends React.Component{
             main : cityWeather.data.main,
             wind : cityWeather.data.wind
         };
-        if(this.state.cities.includes(pomCity.name)){
+        if(cities.includes(pomCity.name)){
             confirmAlert({
                 title: 'Already exist',
                 message: pomCity.name +' is already on list.',
@@ -40,10 +60,10 @@ class App extends React.Component{
             });
             return 1;
         }
-        this.state.cities.push(pomCity.name);
-        this.state.citiesCurrent.push(pomCity);
-        console.log(this.state.citiesCurrent);
-        console.log(this.state.cities);
+
+        setCities([...cities, pomCity.name]);
+        setCitiesCurrent([...citiesCurrent, pomCity]);
+
         confirmAlert({
             title: 'Success',
             message: pomCity.name + ' added on list',
@@ -54,11 +74,13 @@ class App extends React.Component{
                 }
             ]
         });
+
+        console.log(citiesCurrent);
+        console.log(cities);
     };
 
 
-    render() {
-      return (
+    return (
             <div className="App">
                 <header id="header" className="fixed-top d-flex align-items-center header-transparent">
                     <div className="container d-flex align-items-center">
@@ -87,7 +109,7 @@ class App extends React.Component{
                             <h2>Please enter the name of the city</h2>
 
                         </div>
-                        <CityInput toggleOverlay={this.inputLisener}/>
+                        <CityInput toggleOverlay={inputLisener}/>
                         <br/>
                         <div className="row d-flex justify-content-center">
                             <a width="150px" className="btn btn-outline-secondary scrollto custom" href="#services" role="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See table&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
@@ -107,7 +129,7 @@ class App extends React.Component{
                         <div className="section-title">
                             <h3>CURRENT WEATHER</h3>
                         </div>
-                        <TableInput cities={this.state.citiesCurrent}/>
+                        <TableInput cities={citiesCurrent} lisener={removeLisener}/>
 
                     </div>
                 </section>
@@ -120,7 +142,6 @@ class App extends React.Component{
                             <h2>Grafikon</h2>
                             <GraphInput/>
                         </div>
-
 
                     </div>
                 </section>
@@ -146,8 +167,7 @@ class App extends React.Component{
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a href="#" className="back-to-top"><i className="icofont-simple-up"/></a>
             </div>
-        );
-    }
+    );
 }
 
 export default App;
