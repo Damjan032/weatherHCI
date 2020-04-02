@@ -18,8 +18,9 @@ function App(){
     const removeLisener = (city) => {
         console.log(citiesCurrent);
         console.log(cities);
+        let msg = "\u{026A0}" + " Warring";
         confirmAlert({
-            title: 'Warring!',
+            title: msg,
             message:"Are you sure you want to remove "+ city +"?",
             buttons: [
                 {
@@ -47,9 +48,11 @@ function App(){
             main : cityWeather.data.main,
             wind : cityWeather.data.wind
         };
+        document.getElementById("cityInput").value="";
         if(cities.includes(pomCity.name)){
             confirmAlert({
-                title: 'Already exist',
+
+                title: '\uD83D\uDEC8 Already exist',
                 message: pomCity.name +' is already on list.',
                 buttons: [
                     {
@@ -63,14 +66,15 @@ function App(){
 
         setCities([...cities, pomCity.name]);
         setCitiesCurrent([...citiesCurrent, pomCity]);
-
         confirmAlert({
-            title: 'Success',
+            title: '\u2713 Success',
             message: pomCity.name + ' added on list',
             buttons: [
                 {
                     label: 'OK',
-                    onClick: () => {}
+                    onClick: () => {
+
+                    }
                 }
             ]
         });

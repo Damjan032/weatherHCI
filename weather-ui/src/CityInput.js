@@ -23,9 +23,10 @@ class CityInput extends React.Component {
                 console.log("Urosao zahtev")
                 this.props.toggleOverlay(res);
             }).catch((response) => {
+            document.getElementById("cityInput").value="";
             if (this.city === '') {
                 confirmAlert({
-                    title: "Empty",
+                    title: "\uD83D\uDEC8 Empty",
                     message: "Please enter the name of the city",
                     buttons: [
                         {
@@ -36,7 +37,6 @@ class CityInput extends React.Component {
                     ]
                 });
             } else {
-
                 confirmAlert({
                     title: "Not fount",
                     message: "Sorry, we can't found " + this.city,
@@ -57,7 +57,7 @@ class CityInput extends React.Component {
             <div className="d-flex justify-content-center">
                     <div className="form-group mx-sm-3 mb-2">
                         <label htmlFor="inputPassword2" className="sr-only">e.g. "Beograd"</label>
-                        <input type="text" className="form-control" placeholder='e.g. "Beograd"' onKeyUp={this.handleChange.bind(this)}/>
+                        <input id="cityInput" type="text" className="form-control" placeholder='e.g. "Beograd"' onKeyUp={this.handleChange.bind(this)}/>
                     </div>
 
                     <button className="btn btn-primary mb-2" onClick={this.addCity}>Add city</button>
