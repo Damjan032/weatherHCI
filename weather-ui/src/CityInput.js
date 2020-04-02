@@ -11,7 +11,7 @@ class CityInput extends React.Component {
 
     handleChange(event) {
         this.city = event.target.value.trim();
-        console.log(this.city);
+
 
     };
 
@@ -20,7 +20,6 @@ class CityInput extends React.Component {
 
         axios.get("https://api.openweathermap.org/data/2.5/weather?q="+this.city +"&appid=6c4b3a3b02a04f0626ff97606e9453fd")
             .then(res => {
-                console.log("Urosao zahtev")
                 this.props.toggleOverlay(res);
             }).catch((response) => {
             document.getElementById("cityInput").value="";
