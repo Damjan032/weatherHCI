@@ -90,8 +90,7 @@ function Settings(props) {
                             </table>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button onClick={props.fun} type="button" className="btn btn-primary" data-dismiss="modal">Save changes</button>
+                            <button onClick={props.fun} type="button" className="btn btn-primary" data-dismiss="modal">Done</button>
                         </div>
                     </div>
                 </div>

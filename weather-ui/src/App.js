@@ -76,7 +76,8 @@ function App(){
                         wind : day.wind.speed,
                         time : day.dt_txt,
                         pressure : day.main.pressure,
-                        humidity : day.main.humidity
+                        humidity : day.main.humidity,
+                        weather: day.weather[0]
                     });
                     i++;
                     if(emptyList)
@@ -220,7 +221,7 @@ function App(){
                     <div className="container">
                         <div className="section-title">
                             <h2>Chart</h2>
-                            <GraphInput timeList={listOfTime} citis5Days={cities5Days} hours={numberOfHours} days={numberOdDays} param={parametar}/>
+                            <GraphInput timeList={listOfTime} citis5Days={cities5Days} hours={numberOfHours} days={numberOdDays} param={parametar} label={["pon"+numberOdDays,"pon","pon","pon","pon","pon","pon","pon","pon","pon","pon","pon"]}/>
                         </div>
 
                     </div>

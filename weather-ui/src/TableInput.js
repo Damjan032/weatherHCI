@@ -30,12 +30,11 @@ class MoreInfo extends React.Component{
     }
 
     shouldComponentUpdate(nextProps) {
-        console.log("odje dosao")
-        console.log(nextProps.city)
-        console.log( this.state.city)
 
         if(nextProps.city === this.state.city){
             console.log(nextProps);
+
+            // eslint-disable-next-line react/no-direct-mutation-state
             this.state = nextProps;
             this.pera();
             return true;
@@ -89,7 +88,8 @@ class MoreInfo extends React.Component{
                             <thead >
                             <tr>
                                 <th onClick={this.pera} scope="col">Time</th>
-                                <th scope="col">Temp{this.tableData.length}</th>
+                                <th scope="col">Temp</th>
+                                <th scope="col">Weather</th>
                                 <th scope="col">Pressure</th>
                                 <th scope="col">Humidity</th>
                                 <th scope="col">Windx</th>
@@ -98,13 +98,15 @@ class MoreInfo extends React.Component{
                             <tbody>
                             {this.tableData.map(moment => (
                                 <tr key={moment.time}>
-                                    <td>&nbsp;&nbsp;
-                                        {moment.time}
+                                    <td class="text-secondary">&nbsp;&nbsp;
+                                        {moment.time.substring(8, 10)+"."+ moment.time.substring(5, 7)+". "+ moment.time.substring(11, moment.time.length-3)}
                                     </td>
-                                    <td>{Math.round(moment.temp - 273.15)} &#176;C</td>
-                                    <td>{moment.pressure} mbar</td>
-                                    <td>{moment.humidity} %</td>
-                                    <td>{moment.wind} m/s</td>
+
+                                    <td className="">{Math.round(moment.temp - 273.15)} &#176;C</td>
+                                    <td className=""><img height="32" width="32" alt={" "} src={"http://openweathermap.org/img/wn/"+ moment.weather.icon+"@2x.png"}/>  {moment.weather.main}</td>
+                                    <td className="">{moment.pressure} mbar</td>
+                                    <td className="">{moment.humidity} %</td>
+                                    <td className="">{moment.wind} m/s</td>
                                 </tr>
                             ))}
                             </tbody>
@@ -159,8 +161,8 @@ function TableInput(props) {
                         <td>{city.main.pressure} mbar{console.log( props.city5Days)}</td>
                         <td>{city.main.humidity} %</td>
                         <td>
-                            <button  value={city.name} type="button" className="btn btn-primary btn-sm" data-toggle="modal" data-target={"."+city.name}>More info</button>
-                            <div className={"modal fade "+city.name} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <button  value={city.name} type="button" className="btn btn-primary btn-sm" data-toggle="modal" data-target={"."+city.name.split(" ").join("")}>More info</button>
+                            <div className={"modal fade "+city.name.split(" ").join("")} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                 <MoreInfo city={city} numberHours={props.numHou} numberDays = {props.numDays} info5Days={props.city5Days}/>
                             </div>
                         </td>
