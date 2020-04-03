@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import './App.css';
 
 function DeleteButton(props){
@@ -16,7 +16,7 @@ function DeleteButton(props){
 
 class MoreInfo extends React.Component{
     constructor(props) {
-        console.log("NOVIIIIIIIIIIIIIIIII")
+
 
         super(props);
         this.state={
@@ -32,7 +32,7 @@ class MoreInfo extends React.Component{
     shouldComponentUpdate(nextProps) {
 
         if(nextProps.city === this.state.city){
-            console.log(nextProps);
+;
 
             // eslint-disable-next-line react/no-direct-mutation-state
             this.state = nextProps;
@@ -62,7 +62,6 @@ class MoreInfo extends React.Component{
                  })
              }
          })
-         console.log("TA NIJE VALJDA ODJE" + this.tableData.length)
 
     }
 
@@ -78,7 +77,7 @@ class MoreInfo extends React.Component{
                     <div className="modal-header">
                         <h3 className="modal-title" id="exampleModalLongTitle">&nbsp;&nbsp;
                             <img float="left" src={"https://www.countryflags.io/"+this.state.city.country+"/shiny/64.png"} alt={this.state.city.name}/>
-                            &nbsp;&nbsp;&nbsp;{this.state.city.name}{console.log("MAJKU TI JEBEM" + this.state.city.name)},  {this.state.city.country}</h3>
+                            &nbsp;&nbsp;&nbsp;{this.state.city.name},  {this.state.city.country}</h3>
                         <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -98,7 +97,7 @@ class MoreInfo extends React.Component{
                             <tbody>
                             {this.tableData.map(moment => (
                                 <tr key={moment.time}>
-                                    <td class="text-secondary">&nbsp;&nbsp;
+                                    <td className="text-secondary">&nbsp;&nbsp;
                                         {moment.time.substring(8, 10)+"."+ moment.time.substring(5, 7)+". "+ moment.time.substring(11, moment.time.length-3)}
                                     </td>
 
@@ -158,7 +157,7 @@ function TableInput(props) {
                         <td>{city.wind.speed} m/s</td>
                         <td>{Math.round(city.main.temp_max - 273.15)} &#176;C</td>
                         <td>{Math.round(city.main.temp_min - 273.15)} &#176;C</td>
-                        <td>{city.main.pressure} mbar{console.log( props.city5Days)}</td>
+                        <td>{city.main.pressure} mbar</td>
                         <td>{city.main.humidity} %</td>
                         <td>
                             <button  value={city.name} type="button" className="btn btn-primary btn-sm" data-toggle="modal" data-target={"."+city.name.split(" ").join("")}>More info</button>

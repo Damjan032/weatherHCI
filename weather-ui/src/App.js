@@ -13,7 +13,6 @@ function App(){
     let aCitiesCurrent = [];
     let aCities5Days = [];
     let alistOfTime = [];
-    let aHraphProps = {};
     const [numberOdDays, setNumberOfDays] = useState(3);
     const [listOfTime, setListOfTime] = useState(alistOfTime);
     const [parametar, setPatametar] = useState("Temperature");
@@ -21,7 +20,6 @@ function App(){
     const [cities, setCities] = useState(aCities);
     const [citiesCurrent, setCitiesCurrent] = useState(aCitiesCurrent);
     const [cities5Days, setCities5Days] = useState(aCities5Days);
-    const [graphProp, setGrephProp] = useState(aHraphProps);
 
     const onSettingsChange = () => {
         console.log("USAOOOO")
@@ -30,10 +28,6 @@ function App(){
 
 
     const removeLisener = (city) => {
-        console.log(citiesCurrent);
-        console.log(cities);
-        console.log(cities5Days);
-        console.log(listOfTime);
         let msg = "\u{026A0}" + " Warring";
         confirmAlert({
             title: msg,
@@ -89,28 +83,7 @@ function App(){
         if (emptyList)
             setListOfTime([...cities5Days, polListOfTime]);
     };
-    const updateData = () =>{
-        let pom = [];
-        citiesCurrent.map(city => {
-            let pomC = city;
-            cities5Days.map(city5 =>{
-                if(city5.name===city.name){
 
-                    console.log("USAO 88888888")
-                    city5.weather.map(w =>{
-                        if((w.i-1)%(numberOfHours/3)===0 && w.i<=numberOdDays*8){
-                            console.log("Majku ti usao sam ovde")
-                            pomC.toTableData=[...pomC.toTableData, w];
-                        }
-                    })
-
-                }
-            });
-            pom = [...pom, pomC]
-        });
-        setCities(pom);
-
-    }
     const inputLisener = (cityWeather) => {;
 
         let pomCity = {
@@ -251,7 +224,7 @@ function App(){
 
                 <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog"
                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <Settings fun={onSettingsChange} numDays={numberOdDays} setNum={setNumberOfDays} numHours={numberOfHours} setHours={setNumberOfHours} param={parametar} setPatam={setPatametar}/></div>
+                    <Settings fun={onSettingsChange} numDays={numberOdDays} setNum={setNumberOfDays} numHours={numberOfHours} setHours={setNumberOfHours} param={parametar} setParam={setPatametar}/></div>
             </div>
 
 

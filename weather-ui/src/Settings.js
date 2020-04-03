@@ -16,20 +16,26 @@ function Settings(props) {
 
     const dropDownClickedTemp = () => {
         console.log("temperatura");
-        props.setPatam("Temperatura");
+        props.setParam("Temperature");
 
 
     };
 
     const dropDownClickedHumidity = () => {
         console.log("dropDownClickedHumidity")
-        props.setPatam("Humidity");
+        props.setParam("Humidity");
 
     };
 
     const dropDownClickedPressure = () => {
         console.log("temperatura")
-        props.setPatam("Pressure");
+        props.setParam("Pressure");
+
+    };
+
+    const dropDownClickedWind = () => {
+        console.log("temperatura")
+        props.setParam("Wind");
 
     };
 
@@ -73,15 +79,17 @@ function Settings(props) {
                                         &nbsp;&nbsp;Graph display parameter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     </td>
                                     <td>
-                                        <div className="dropdown show">
-                                            <a className="btn btn-secondary dropdown-toggle" href="#about" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <div className="dropdown">
+                                            <button className="btn btn-secondary dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
                                                 {props.param}
-                                            </a>
-
-                                            <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                                <a onClick={dropDownClickedTemp} className="dropdown-item" href="#about">Temperature</a>
-                                                <a onClick={dropDownClickedHumidity} className="dropdown-item" href="#about">Humidity</a>
-                                                <a onClick={dropDownClickedPressure} className="dropdown-item" href="#about">Pressure</a>
+                                            </button>
+                                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a onClick={dropDownClickedTemp} className="dropdown-item scrollto" href="#">Temperature</a>
+                                                <a onClick={dropDownClickedHumidity} className="dropdown-item scrollto" href="#">Humidity</a>
+                                                <a onClick={dropDownClickedPressure} className="dropdown-item scrollto" href="#">Pressure</a>
+                                                <a onClick={dropDownClickedWind} className="dropdown-item" href="#">Wind</a>
                                             </div>
                                         </div>
                                     </td>
