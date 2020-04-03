@@ -65,7 +65,7 @@ function Settings(props) {
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Number of hours: {props.numHours}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     </td>
                                     <td>
-                                        <input onChange={changeNumberOfHours} defaultValue="3" max="12" min="3" step ="3" type="range" className="custom-range" id="customRange1"/>
+                                        <input onChange={changeNumberOfHours} defaultValue="6" max="12" min="3" step ="3" type="range" className="custom-range" id="customRange1"/>
                                     </td>
                                 </tr>
                                 <tr key={"3"}>

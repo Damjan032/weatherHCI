@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './App.css';
-import MoreInfo from "./moreInfo";
 
 function DeleteButton(props){
     const sendRemoveSignal = () =>
@@ -15,25 +14,120 @@ function DeleteButton(props){
 
 }
 
+class MoreInfo extends React.Component{
+    constructor(props) {
+        console.log("NOVIIIIIIIIIIIIIIIII")
+
+        super(props);
+        this.state={
+            city : this.props.city,
+            info5Days: this.props.info5Days,
+            numberDays: this.props.numberDays,
+            numberHours: this.props.numberHours,
+            table : []
+        };
+        this.tableData=[]
+    }
+
+    shouldComponentUpdate(nextProps) {
+        console.log("odje dosao")
+        console.log(nextProps.city)
+        console.log( this.state.city)
+
+        if(nextProps.city === this.state.city){
+            console.log(nextProps);
+            this.state = nextProps;
+            this.pera();
+            return true;
+        }
+        return false;
+
+    }
+
+    pera (){;
+         console.log(this.state);
+         this.tableData=[];
+         this.state.info5Days.map(cityP =>{
+             if(cityP.name===this.state.city.name){
+                 cityP.weather.map(w =>{
+                     if((w.i-1)%(this.state.numberHours/3)===0 && w.i<(this.state.numberDays*8)){
+                         let pom = false;
+                         this.tableData.map(tP => {
+                             if (tP.time === w.time){
+                                 pom=true;
+                             }
+                         });
+                         if(pom===false)
+                            this.tableData = [...this.tableData, w];
+                     }
+                 })
+             }
+         })
+         console.log("TA NIJE VALJDA ODJE" + this.tableData.length)
+
+    }
+
+
+    render() {
+
+
+
+        return (
+            <div className="modal-dialog modal-lg">
+
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h3 className="modal-title" id="exampleModalLongTitle">&nbsp;&nbsp;
+                            <img float="left" src={"https://www.countryflags.io/"+this.state.city.country+"/shiny/64.png"} alt={this.state.city.name}/>
+                            &nbsp;&nbsp;&nbsp;{this.state.city.name}{console.log("MAJKU TI JEBEM" + this.state.city.name)},  {this.state.city.country}</h3>
+                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div className="modal-body">
+                        <table id="tableid" className="table table-hover">
+                            <thead >
+                            <tr>
+                                <th onClick={this.pera} scope="col">Time</th>
+                                <th scope="col">Temp{this.tableData.length}</th>
+                                <th scope="col">Pressure</th>
+                                <th scope="col">Humidity</th>
+                                <th scope="col">Windx</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {this.tableData.map(moment => (
+                                <tr key={moment.time}>
+                                    <td>&nbsp;&nbsp;
+                                        {moment.time}
+                                    </td>
+                                    <td>{Math.round(moment.temp - 273.15)} &#176;C</td>
+                                    <td>{moment.pressure} mbar</td>
+                                    <td>{moment.humidity} %</td>
+                                    <td>{moment.wind} m/s</td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        );
+    }
+
+}
+
 function TableInput(props) {
     // eslint-disable-next-line no-useless-constructor
-    const find5nfo = (nameOfCity) =>{
-        let list2 = [];
-
-        console.log("Usao ovde");
-        console.log(nameOfCity);
-        let ci = {};
-        console.log(props.city5Days);
-        let i = 0;
-        props.city5Days.map(city =>{
-            if (city.name === nameOfCity)
-                ci = city;
-        });
-        return {tableData: list2,
-            fullInfo :ci};
-    };
 
     return (
+        <div>
             <table className="table table-hover">
                 <thead >
                 <tr>
@@ -62,19 +156,20 @@ function TableInput(props) {
                         <td>{city.wind.speed} m/s</td>
                         <td>{Math.round(city.main.temp_max - 273.15)} &#176;C</td>
                         <td>{Math.round(city.main.temp_min - 273.15)} &#176;C</td>
-                        <td>{city.main.pressure} mbar</td>
-                        <td>{city.main.humidity} %</td>{console.log("NASAO SAM T" + props.city5Days.filter(city5 => city5.name ===city.name).name)}
+                        <td>{city.main.pressure} mbar{console.log( props.city5Days)}</td>
+                        <td>{city.main.humidity} %</td>
                         <td>
-                            <button type="button" className="btn btn-primary btn-sm" data-toggle="modal" data-target=".bd-example-modal-lg">More info</button>
-                            <div className="modal fade bd-example-modal-lg" tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                <MoreInfo numberHours={props.numHou} numberDays = {props.numDays} info5Days={find5nfo(city.name)}/>
-                                }/>
+                            <button  value={city.name} type="button" className="btn btn-primary btn-sm" data-toggle="modal" data-target={"."+city.name}>More info</button>
+                            <div className={"modal fade "+city.name} tabIndex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <MoreInfo city={city} numberHours={props.numHou} numberDays = {props.numDays} info5Days={props.city5Days}/>
                             </div>
                         </td>
                     </tr>
                 ))}
                 </tbody>
             </table>
+
+        </div>
 
     );
 

@@ -72,8 +72,7 @@ function GraphInput(props) {
           <div>
           <HighchartsReact highcharts={Highcharts} options={options} />
           </div>
-          <p>OVDEEEEEEEEEEEE{
-              console.log("OVFE" + props.timeList)}</p>
+          <p>OVDEEEEEEEEEEEE</p>
       </div>
     );
 }

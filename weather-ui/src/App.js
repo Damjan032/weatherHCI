@@ -68,31 +68,49 @@ function App(){
                     name: city,
                     weather: []
                 };
+                let i = 0;
                 res.data.list.map(day =>{
                     pomCity5Days.weather.push({
+                        i : i,
                         temp: day.main.temp,
                         wind : day.wind.speed,
                         time : day.dt_txt,
                         pressure : day.main.pressure,
                         humidity : day.main.humidity
                     });
+                    i++;
                     if(emptyList)
-                        polListOfTime.push("pon");
-                       // polListOfTime.push(day.dt_txt.substring(8, 13));
+                        polListOfTime.push(day.dt_txt.substring(8, 13));
                     }
                 );
-                console.log(cities5Days.length);
-
-
                 setCities5Days([...cities5Days, pomCity5Days]);
-                console.log(cities5Days.length)
             });
         if (emptyList)
             setListOfTime([...cities5Days, polListOfTime]);
     };
+    const updateData = () =>{
+        let pom = [];
+        citiesCurrent.map(city => {
+            let pomC = city;
+            cities5Days.map(city5 =>{
+                if(city5.name===city.name){
 
-    const inputLisener = (cityWeather) => {
-        console.log(cityWeather.data.sys);
+                    console.log("USAO 88888888")
+                    city5.weather.map(w =>{
+                        if((w.i-1)%(numberOfHours/3)===0 && w.i<=numberOdDays*8){
+                            console.log("Majku ti usao sam ovde")
+                            pomC.toTableData=[...pomC.toTableData, w];
+                        }
+                    })
+
+                }
+            });
+            pom = [...pom, pomC]
+        });
+        setCities(pom);
+
+    }
+    const inputLisener = (cityWeather) => {;
 
         let pomCity = {
             name: cityWeather.data.name,
