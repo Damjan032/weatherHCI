@@ -1,59 +1,57 @@
 import React from 'react';
-
 import CanvasJSReact from './canvasjs.react';
 
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+let CanvasJSChart = CanvasJSReact.CanvasJSChart;
+let updateInterval = 2000;
+let yForma = "#";
+let sufix = "";
 
-var updateInterval = 2000;
-//initial values
-
-var yForma = "#";
-var sufix = "";
-
-class GraphInput extends  React.Component{
-    constructor() {
-        super();
+class GraphInput extends React.Component {
+    constructor(props) {
+        super(props);
         this.updateChart = this.updateChart.bind(this);
     }
-    componentDidMount(){
+
+    componentDidMount() {
         this.updateChart();
         setInterval(this.updateChart, updateInterval);
     }
+
     toggleDataSeries(e) {
         e.dataSeries.visible = !(typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible);
         this.chart.render();
     }
+
     updateChart() {
-        if (this.props.days === "1"){
+        if (this.props.days === "1") {
             this.chart.options.axisX.title = "Predictions in next 24h"
-        }
-        else{
+        } else {
             this.chart.options.axisX.title = "Predictions in next " + this.props.days + " days"
         }
         this.chart.options.data = [];
         let len = this.props.citis5Days.length;
         yForma = "";
-        if(this.props.param==="Pressure"){
+        if (this.props.param === "Pressure") {
             yForma = "#";
-            this.chart.options.axisY.suffix =" mab";
+            this.chart.options.axisY.suffix = " mab";
         }
-        if(this.props.param==="Humidity"){
+        if (this.props.param === "Humidity") {
             yForma = "#";
             this.chart.options.axisY.suffix = " %";
         }
-        if(this.props.param==="Temperature"){
-            yForma =  "#";
+        if (this.props.param === "Temperature") {
+            yForma = "#";
             this.chart.options.axisY.suffix = '\u2103';
         }
-        if(this.props.param==="Wind"){
-            yForma =  "#,#";
+        if (this.props.param === "Wind") {
+            yForma = "#,#";
             this.chart.options.axisY.suffix = " m/s"
         }
         for (var i = 0; i < len; i++) {
             let pom =
                 {
                     type: "spline",
-                    xValueFormatString:"DDDD HH:00",
+                    xValueFormatString: "DDDD HH:00",
                     yValueFormatString: yForma,
                     showInLegend: true,
                     name: this.props.citis5Days[i].name,
@@ -61,68 +59,58 @@ class GraphInput extends  React.Component{
                 };
             let pomvalues = [];
             let len2 = this.props.citis5Days[i].weather.length;
-            for (let j = 0; j < len2; j++){
-                if((this.props.citis5Days[i].weather[j].i)%(this.props.hours/3)===0 && this.props.citis5Days[i].weather[j].i<(this.props.days*8)){
+            for (let j = 0; j < len2; j++) {
+                if ((this.props.citis5Days[i].weather[j].i) % (this.props.hours / 3) === 0 && this.props.citis5Days[i].weather[j].i < (this.props.days * 8)) {
                     let yValue = 0;
-                    if(this.props.param==="Pressure"){
+                    if (this.props.param === "Pressure") {
                         yValue = this.props.citis5Days[i].weather[j].pressure;
-                    }
-                    else if(this.props.param==="Humidity"){
+                    } else if (this.props.param === "Humidity") {
                         yValue = this.props.citis5Days[i].weather[j].humidity;
-                    }
-                    else if(this.props.param==="Temperature"){
-                        yValue =  this.props.citis5Days[i].weather[j].temp- 273.15;
-                    }
-                    else if(this.props.param==="Wind"){
+                    } else if (this.props.param === "Temperature") {
+                        yValue = this.props.citis5Days[i].weather[j].temp - 273.15;
+                    } else if (this.props.param === "Wind") {
                         yValue = this.props.citis5Days[i].weather[j].wind;
                     }
                     pomvalues.push({
-                        x:  new Date(this.props.citis5Days[i].weather[j].time),
+                        x: new Date(this.props.citis5Days[i].weather[j].time),
                         y: yValue
                     });
                 }
             }
             pom.dataPoints = pomvalues;
             this.chart.options.data.push(pom);
-
-
         }
-
         this.chart.render();
     }
+
     render() {
         const options = {
             zoomEnabled: true,
             theme: "light1",
-            title: {
-            },
+            title: {},
             axisX: {
-
-
                 valueFormatString: "DDDD HH"
             },
-            axisY:{
-                title:  this.props.param,
-                suffix:sufix,
+            axisY: {
+                title: this.props.param,
+                suffix: sufix,
                 includeZero: false
             },
             toolTip: {
                 shared: true
             },
             legend: {
-                cursor:"pointer",
+                cursor: "pointer",
                 verticalAlign: "top",
                 fontSize: 18,
                 fontColor: "dimGrey",
-                itemclick : this.toggleDataSeries
+                itemclick: this.toggleDataSeries
             },
-            data: [
-
-            ]
+            data: []
         };
         return (
             <div>
-                <CanvasJSChart options = {options}
+                <CanvasJSChart options={options}
                                onRef={ref => this.chart = ref}
                 />
                 {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
@@ -130,4 +118,5 @@ class GraphInput extends  React.Component{
 
     };
 }
+
 export default GraphInput;
