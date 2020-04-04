@@ -1,44 +1,37 @@
 import React from 'react';
-import { render } from 'react-dom';
-import Highcharts from 'highcharts/highstock';
-import HighchartsReact from 'highcharts-react-official';
+
 import CanvasJSReact from './canvasjs.react';
-//var CanvasJSReact = require('./canvasjs.react');
-var CanvasJS = CanvasJSReact.CanvasJS;
+
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-var dateFormat = require('dateformat');
-var dataPoints1 = [];
-var dataPoints2 = [];
-var date = [];
+
 var updateInterval = 2000;
 //initial values
-var yValue1 = 408;
-var yValue2 = 350;
+
 var yForma = "#";
-var sufix = ""
-var times = 0;
+var sufix = "";
+
 class GraphInput extends  React.Component{
     constructor() {
         super();
         this.updateChart = this.updateChart.bind(this);
     }
     componentDidMount(){
-        this.updateChart(20);
+        this.updateChart();
         setInterval(this.updateChart, updateInterval);
     }
     toggleDataSeries(e) {
-        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-            e.dataSeries.visible = false;
-        }
-        else {
-            e.dataSeries.visible = true;
-        }
+        e.dataSeries.visible = !(typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible);
         this.chart.render();
     }
     updateChart() {
+        if (this.props.days === "1"){
+            this.chart.options.axisX.title = "Predictions in next 24h"
+        }
+        else{
+            this.chart.options.axisX.title = "Predictions in next " + this.props.days + " days"
+        }
         this.chart.options.data = [];
         let len = this.props.citis5Days.length;
-        date = [];
         yForma = "";
         if(this.props.param==="Pressure"){
             yForma = "#";
@@ -66,10 +59,8 @@ class GraphInput extends  React.Component{
                     name: this.props.citis5Days[i].name,
                     dataPoints: []
                 };
-            console.log(pom)
             let pomvalues = [];
             let len2 = this.props.citis5Days[i].weather.length;
-            times = 0;
             for (let j = 0; j < len2; j++){
                 if((this.props.citis5Days[i].weather[j].i)%(this.props.hours/3)===0 && this.props.citis5Days[i].weather[j].i<(this.props.days*8)){
                     let yValue = 0;
@@ -89,7 +80,6 @@ class GraphInput extends  React.Component{
                         x:  new Date(this.props.citis5Days[i].weather[j].time),
                         y: yValue
                     });
-                    times++;
                 }
             }
             pom.dataPoints = pomvalues;
@@ -107,9 +97,12 @@ class GraphInput extends  React.Component{
             title: {
             },
             axisX: {
+
+
                 valueFormatString: "DDDD HH"
             },
             axisY:{
+                title:  this.props.param,
                 suffix:sufix,
                 includeZero: false
             },
@@ -126,7 +119,7 @@ class GraphInput extends  React.Component{
             data: [
 
             ]
-        }
+        };
         return (
             <div>
                 <CanvasJSChart options = {options}

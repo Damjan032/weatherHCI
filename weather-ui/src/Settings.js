@@ -5,7 +5,6 @@ import React from 'react';
 function Settings(props) {
     // eslint-disable-next-line no-useless-constructor
     const changeNumberOfDays = (event) => {
-        console.log(event.target.value);
         props.setNum(event.target.value)
     };
 
@@ -15,26 +14,22 @@ function Settings(props) {
     };
 
     const dropDownClickedTemp = () => {
-        console.log("temperatura");
         props.setParam("Temperature");
 
 
     };
 
     const dropDownClickedHumidity = () => {
-        console.log("dropDownClickedHumidity")
         props.setParam("Humidity");
 
     };
 
     const dropDownClickedPressure = () => {
-        console.log("temperatura")
         props.setParam("Pressure");
 
     };
 
     const dropDownClickedWind = () => {
-        console.log("temperatura")
         props.setParam("Wind");
 
     };
@@ -80,16 +75,20 @@ function Settings(props) {
                                     </td>
                                     <td>
                                         <div className="dropdown">
-                                            <button className="btn btn-secondary dropdown-toggle" type="button"
+                                            <button className="btn btn-outline-primary dropdown-toggle" type="button"
                                                     id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false">
                                                 {props.param}
                                             </button>
                                             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                                                 <a onClick={dropDownClickedTemp} className="dropdown-item scrollto" href="#">Temperature</a>
+                                                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                                                 <a onClick={dropDownClickedHumidity} className="dropdown-item scrollto" href="#">Humidity</a>
+                                                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                                                 <a onClick={dropDownClickedPressure} className="dropdown-item scrollto" href="#">Pressure</a>
-                                                <a onClick={dropDownClickedWind} className="dropdown-item" href="#">Wind</a>
+                                                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                                                <a onClick={dropDownClickedWind} className="dropdown-item scrollto" href="#">Wind</a>
                                             </div>
                                         </div>
                                     </td>
@@ -98,7 +97,7 @@ function Settings(props) {
                             </table>
                         </div>
                         <div className="modal-footer">
-                            <button onClick={props.fun} type="button" className="btn btn-primary" data-dismiss="modal">Done</button>
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Done</button>
                         </div>
                     </div>
                 </div>

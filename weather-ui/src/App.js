@@ -21,14 +21,8 @@ function App(){
     const [citiesCurrent, setCitiesCurrent] = useState(aCitiesCurrent);
     const [cities5Days, setCities5Days] = useState(aCities5Days);
 
-    const onSettingsChange = () => {
-        console.log("USAOOOO")
-
-    };
-
-
     const removeLisener = (city) => {
-        let msg = "\u{026A0}" + " Warring";
+        let msg = "\u{026A0} Warring";
         confirmAlert({
             title: msg,
             message:"Are you sure you want to remove "+ city +"?",
@@ -63,6 +57,7 @@ function App(){
                     weather: []
                 };
                 let i = 0;
+                // eslint-disable-next-line array-callback-return
                 res.data.list.map(day =>{
                     pomCity5Days.weather.push({
                         i : i,
@@ -156,7 +151,7 @@ function App(){
                 <section id="about" className="about">
                     <div className="container">
                         <div className="section-title">
-                            <h2>Please enter the name of the city</h2>
+                            <h2>PLEASE ENTER THE NAME OF THE CITY</h2>
 
                         </div>
                         <CityInput toggleOverlay={inputLisener}/>
@@ -193,7 +188,7 @@ function App(){
                 <section id="graph" className="featured">
                     <div className="container">
                         <div className="section-title">
-                            <h2>Chart</h2>
+                            <h3>WEATHER PREDICTION</h3>
                             <GraphInput timeList={listOfTime} citis5Days={cities5Days} hours={numberOfHours} days={numberOdDays} param={parametar} label={["pon"+numberOdDays,"pon","pon","pon","pon","pon","pon","pon","pon","pon","pon","pon"]}/>
                         </div>
 
@@ -224,7 +219,7 @@ function App(){
 
                 <div className="modal fade" id="exampleModalCenter" tabIndex="-1" role="dialog"
                      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <Settings fun={onSettingsChange} numDays={numberOdDays} setNum={setNumberOfDays} numHours={numberOfHours} setHours={setNumberOfHours} param={parametar} setParam={setPatametar}/></div>
+                    <Settings numDays={numberOdDays} setNum={setNumberOfDays} numHours={numberOfHours} setHours={setNumberOfHours} param={parametar} setParam={setPatametar}/></div>
             </div>
 
 

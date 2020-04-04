@@ -43,14 +43,16 @@ class MoreInfo extends React.Component{
 
     }
 
-    pera (){;
-         console.log(this.state);
+    pera (){
          this.tableData=[];
+        // eslint-disable-next-line array-callback-return
          this.state.info5Days.map(cityP =>{
              if(cityP.name===this.state.city.name){
+                 // eslint-disable-next-line array-callback-return
                  cityP.weather.map(w =>{
                      if((w.i-1)%(this.state.numberHours/3)===0 && w.i<(this.state.numberDays*8)){
                          let pom = false;
+                         // eslint-disable-next-line array-callback-return
                          this.tableData.map(tP => {
                              if (tP.time === w.time){
                                  pom=true;
