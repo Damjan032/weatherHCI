@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import './App.css';
-import CityInput from "./CityInput";
-import TableInput from "./TableInput";
-import GraphInput from "./GraphInput";
-import Settings from "./Settings";
+import CityInput from "./components/CityInput";
+import TableInput from "./components/TableInput";
+import GraphInput from "./components/GraphInput";
+import Settings from "./components/Settings";
 import axios from 'axios';
 import {confirmAlert} from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css

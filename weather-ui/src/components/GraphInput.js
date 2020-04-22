@@ -1,5 +1,5 @@
 import React from 'react';
-import CanvasJSReact from './canvasjs.react';
+import CanvasJSReact from '../CanvasJS/canvasjs.react';
 
 let CanvasJSChart = CanvasJSReact.CanvasJSChart;
 let updateInterval = 2000;
@@ -89,7 +89,7 @@ class GraphInput extends React.Component {
             theme: "light1",
             title: {},
             axisX: {
-                valueFormatString: "DDDD HH"
+                valueFormatString: "DDDD HH:00"
             },
             axisY: {
                 title: this.props.param,
