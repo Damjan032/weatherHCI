@@ -26,7 +26,7 @@ class CityInput extends React.Component {
             if (this.city === '') {
                 confirmAlert({
                     title: "\uD83D\uDEC8 Empty",
-                    message: "Please enter the name of the city",
+                    message: "Please enter the name of the city.",
                     buttons: [
                         {
                             label: 'OK',
@@ -37,8 +37,8 @@ class CityInput extends React.Component {
                 });
             } else {
                 confirmAlert({
-                    title: "Not fount",
-                    message: "Sorry, we can't found " + this.city,
+                    title: "\u2716 Couldn't found",
+                    message: "Sorry, we couldn't found the " + this.city +".",
                     buttons: [
                         {
                             label: 'OK',

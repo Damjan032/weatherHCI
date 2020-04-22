@@ -23,6 +23,20 @@ class GraphInput extends React.Component {
     }
 
     updateChart() {
+        let len5d = this.props.citis5Days.length;
+        let numToRem = -1;
+        for (let i = 0 ; i < len5d-1; i++){
+            for(let j = i+1; j < len5d; j++)
+            {
+                if(this.props.citis5Days[i].name === this.props.citis5Days[j].name){
+                    numToRem = j;
+                }
+            }
+        }
+        if(numToRem!==-1){
+            this.props.citis5Days.splice(numToRem, 1)
+        }
+
         if (this.props.days === "1") {
             this.chart.options.axisX.title = "Predictions in next 24h"
         } else {
