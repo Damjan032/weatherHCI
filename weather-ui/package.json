@@ -35,7 +35,7 @@
     ]
   },
   "devDependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "dateformat": "^3.0.3",
     "react-bootstrap-slider": "^2.2.3",
     "react-confirm-alert": "^2.6.1"
